@@ -24,3 +24,5 @@ Check installed version:
 Create the tsconfig.json for the typescript project:
 
 `npx tsc --init`
+
+To enable errors in your JavaScript files add: `// @ts-check` to the first line in your .js files to have TypeScript raise it as an error.
