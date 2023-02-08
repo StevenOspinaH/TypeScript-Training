@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://httpbin.org/';
 
 type ResponseBody = {
-  args: null,
+  args: object | null,
   headers: string[];
   origin: string,
   url: string,
@@ -23,7 +23,7 @@ async function getApi() {
 
   // "response status is: 200"
   console.log('response status is: ', status);
-
+  return {data, status};
 };
 
-getApi();
+export default getApi;
