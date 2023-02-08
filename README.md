@@ -44,3 +44,13 @@ Running the code using the transpiler:
 Running using `ts-node`:
 
 `npm run ts-node`
+
+## Task 3: Unit Test
+
+Install mocha/cahi and the declarations types:
+
+`npm install -D mocha chai @types/mocha @types/chai`
+
+Running unit test with mocha/chai:
+
+`npm run test:mocha`
