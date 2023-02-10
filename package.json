@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/task21.js",
-    "ts-node": "ts-node src/task21.ts",
+    "ts-node": "ts-node",
     "test:mocha": "mocha --require ts-node/register test/*_spec.ts --timeout 8000"
   },
   "repository": {
