@@ -1,34 +1,35 @@
 import axios, {AxiosResponse, AxiosError} from 'axios';
-import { IrequestManager, ActionVerb } from './IRequestManager';
+import { IrequestManager, ActionVerb, RequestResponse } from './IRequestManager';
 
-class RequestManager implements IrequestManager<AxiosResponse> {
+class RequestManager implements IrequestManager<RequestResponse> {
   axios = axios;
   constructor(public url: string) {
     this.axios.defaults.baseURL = url;
   }
 
-  async request(action: ActionVerb, endpoint: string, body?: Object): Promise<AxiosResponse>{
+  async request(action: ActionVerb, endpoint: string, body?: Object, headers?: any): Promise<RequestResponse>{
     try {
-      const response = await this.axios<AxiosResponse>({
+      const rta = await this.axios<AxiosResponse>({
         method: action,
         url: endpoint,
         data : body,
-        headers: {
+        headers: headers || {
           Accept: 'application/json',
         },
       })
 
-      return response;
+      const responseAdaptee:RequestResponse = {
+        data: rta.data,
+        status: rta.status,
+        headers: rta.headers
+      };
+
+      return responseAdaptee;
     } catch (err){
-      const errors = err as Error | AxiosError;
-      if (!this.axios.isAxiosError(errors))  {
-        console.error(errors.message);
-        const newError = new AxiosError<any>;
-        return newError.response?.data;
-      } else {
-        console.error(errors.response?.data);
-        return errors.response?.data;
-      }
+      const errors = err as AxiosError;
+      console.error(errors.stack);
+      console.error(errors.response?.data);
+      throw errors;
     }
   }
 }
