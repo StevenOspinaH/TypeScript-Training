@@ -54,3 +54,10 @@ Install mocha/cahi and the declarations types:
 Running unit test with mocha/chai:
 
 `npm run test:mocha`
+
+## Task: Second Adaptee using SuperAgent
+
+Install Superagent and declarations types:
+
+`npm install -D superagent @types/superagent`
+
